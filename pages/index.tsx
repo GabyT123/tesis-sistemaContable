@@ -136,7 +136,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleSolicitudes}
-                      disabled={!CheckPermissions(auth, [0, 1, 3, 5])}
+                      disabled={!CheckPermissions(auth, [0, 3, 5])}
                     >
                       Solicitudes de Pagos
                     </button>
@@ -146,7 +146,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleHistory}
-                      disabled={!CheckPermissions(auth, [0, 1, 3, 5])}
+                      disabled={!CheckPermissions(auth, [0, 3, 5])}
                     >
                       Historial Solicitudes
                     </button>
@@ -192,7 +192,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleAppVentas}
-                      disabled={!CheckPermissions(auth, [0, 1, 2])}
+                      disabled={!CheckPermissions(auth, [0, 1])}
                     >
                       Ir al Inventario
                     </button>
@@ -201,7 +201,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleAppVentas}
-                      disabled={!CheckPermissions(auth, [0, 1, 2, 4])}
+                      disabled={!CheckPermissions(auth, [0, 1, 2])}
                     >
                       Ir al Aplicativo
                     </button>
@@ -246,7 +246,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleAppReportes}
-                      disabled={!CheckPermissions(auth, [0, 1])}
+                      disabled={!CheckPermissions(auth, [0, 4])}
                     >
                       Ir al Aplicativo
                     </button>

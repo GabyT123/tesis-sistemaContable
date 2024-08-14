@@ -189,7 +189,7 @@ const Beneficiary = () => {
 
   return (
     <>
-      <RoleLayout permissions={[0, 1]}>
+      <RoleLayout permissions={[0, 3, 5]}>
         <title>Beneficiarios</title>
         <div className="flex h-full">
           <div className="md:w-1/6 max-w-none">
@@ -229,7 +229,7 @@ const Beneficiary = () => {
                     <button
                       className="text-center bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full text-sm"
                       onClick={showModal}
-                      disabled={!CheckPermissions(auth, [0, 1])}
+                      disabled={!CheckPermissions(auth, [0, 3, 5])}
                     >
                       Crear Beneficiario
                     </button>
@@ -313,7 +313,7 @@ const Beneficiary = () => {
           visible={modalVisible}
           close={hideModal}
           initialData={editingClient}
-          onDone={async (newUser: Client) => {
+          onDone={async (newBeneficiary: Client) => {
             const response: ResponseData =
               editingClient == null
                 ? await HttpClient(
@@ -321,14 +321,14 @@ const Beneficiary = () => {
                     "POST",
                     auth.userName,
                     auth.role,
-                    newUser
+                    newBeneficiary
                   )
                 : await HttpClient(
                     "/api/client",
                     "PUT",
                     auth.userName,
                     auth.role,
-                    newUser
+                    newBeneficiary
                   );
             if (response.success) {
               toast.success(

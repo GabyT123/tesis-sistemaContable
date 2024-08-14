@@ -84,6 +84,8 @@ BanksSchema.set("toJSON", {
 export const BanksModel =
   mongoose.models.Banks || mongoose.model("Banks", BanksSchema);
 
+
+
 const ClientSchema = new mongoose.Schema<Client>(
   {
     beneficiary: { type: String },
@@ -95,7 +97,6 @@ const ClientSchema = new mongoose.Schema<Client>(
     bank: { type: String },
     accountBank: { type: String },
     accountType: { type: String },
-    accountTypeB: { type: String },
     codBank: { type: String },
     typeCard: { type: String },
   },

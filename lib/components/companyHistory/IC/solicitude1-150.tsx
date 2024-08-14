@@ -79,7 +79,7 @@ const Solicitude1a150 = (props: Props) => {
       dataField: "soliciter",
       caption: "Solicitante",
       cssClass: "bold",
-      width: 85,
+      width: 20,
     },
     {
       dataField: "details",

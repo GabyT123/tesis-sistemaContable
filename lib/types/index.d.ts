@@ -25,7 +25,6 @@ export type UserRole =
   | 3
   | 4
   | 5
-  | 6
 
 export type User = {
   id?: string;
