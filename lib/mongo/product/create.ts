@@ -1,28 +1,28 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Client } from "../../types";
+import { Product } from "../../types";
 import FormatedDate from "../../utils/formated_date";
-import { ClientModel, AuditoryModel } from "../schemas";
+import { ProductModel, AuditoryModel } from "../schemas";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const client = req.body as Client;
+  const product = req.body as Product;
   const userName = req.headers.username as string;
 
-  const newClient = new ClientModel(client);
+  const newproduct = new ProductModel(product);
 
-  await newClient.save();
+  await newproduct.save();
 
   const auditory = new AuditoryModel({
     date: FormatedDate(),
     user: userName,
-    action: "Creo un Beneficiario: " + client.beneficiary,
+    action: "Creo un Producto: " + product.name,
   });
   await auditory.save();
 
   return res.status(200).json({
-    message: "Beneficiario Creado",
+    message: "Producto Creado",
     success: true,
   });
 }

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Client } from "../../types";
-import { ClientModel } from "../schemas";
+import { Customer } from "../../types";
+import { CustomerModel } from "../schemas";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,11 +9,11 @@ export default async function handler(
   const id = req.query.id as string;
 
   // fetch the posts
-  const client = await ClientModel.findById(id)
+  const client = await CustomerModel.findById(id)
 
   return res.status(200).json({
-    message: "un usuario",
-    data: client as Client,
+    message: "un cliente",
+    data: client as Customer,
     success: true,
   });
 }

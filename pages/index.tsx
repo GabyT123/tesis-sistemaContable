@@ -6,9 +6,14 @@ import Sidebar from "../lib/components/sidebar";
 import { useAuth } from "../lib/hooks/use_auth";
 import { toast } from "react-toastify";
 import { CheckPermissions } from "../lib/utils/check_permissions";
+import GeneralReportModal from "../lib/components/modals/generalReport";
+import { useState } from "react";
 
 export default function Home() {
   const { auth } = useAuth();
+  const [modalVisibleGR, setModalVisibleGR] = useState<boolean>(false);
+
+  const showModalGR = () => setModalVisibleGR(true);
 
   const handleSolicitudes = () => {
     auth.role === 1
@@ -16,31 +21,8 @@ export default function Home() {
       : Router.push({ pathname: "/solicitude" });
   };
 
-  const handleAdvances = () => {
-    auth.role === 1
-      ? Router.push({ pathname: "/requestsAdvance" })
-      : Router.push({ pathname: "/advance" });
-  };
   const handleHistory = () => {
     Router.push({ pathname: "/solicitudeHistory" });
-  };
-
-  const handleNomina = () => {
-    auth.role === 0 || auth.role === 3 || auth.role === 4 || auth.role === 5
-      ? Router.push({ pathname: "/nomina" })
-      : toast.warning("No tienes permiso para revisar la nomina");
-  };
-
-  const handleAppHolidays = () => {
-    Router.push({ pathname: "/appHolidays" });
-  };
-
-  const handleAppGestion = () => {
-    Router.push({ pathname: "/gestion" });
-  };
-
-  const handleAppGerencia = () => {
-    Router.push({ pathname: "/gerencia" });
   };
 
   const handleAppReportes = () => {
@@ -51,6 +33,9 @@ export default function Home() {
     Router.push({ pathname: "/ventas" });
   };
 
+  const handleAppInventario = () => {
+    Router.push({ pathname: "/inventario" });
+  };
   return (
     <>
       <title>Comercial Torres</title>
@@ -73,7 +58,7 @@ export default function Home() {
                 fontWeight: "bold",
               }}
             >
-              <strong>Sistema Contable </strong> |{" "}
+              <strong>Sistema </strong> |{" "}
               <em
                 style={{
                   color: "#bb22dd",
@@ -81,7 +66,7 @@ export default function Home() {
                   fontSize: "26px",
                 }}
               >
-                "Comercial Torres"
+                "Comercial Torres" 
               </em>
               <hr
                 className="mt-0 ml-0 "
@@ -136,7 +121,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleSolicitudes}
-                      disabled={!CheckPermissions(auth, [0, 3, 5])}
+                      disabled={!CheckPermissions(auth, [0, 1, 3, 5])}
                     >
                       Solicitudes de Pagos
                     </button>
@@ -146,7 +131,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleHistory}
-                      disabled={!CheckPermissions(auth, [0, 3, 5])}
+                      disabled={!CheckPermissions(auth, [0, 1, 3, 5])}
                     >
                       Historial Solicitudes
                     </button>
@@ -191,8 +176,8 @@ export default function Home() {
                   <li>
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
-                      onClick={handleAppVentas}
-                      disabled={!CheckPermissions(auth, [0, 1])}
+                      onClick={handleAppInventario}
+                      disabled={!CheckPermissions(auth, [0, 1, 2])}
                     >
                       Ir al Inventario
                     </button>
@@ -201,7 +186,7 @@ export default function Home() {
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
                       onClick={handleAppVentas}
-                      disabled={!CheckPermissions(auth, [0, 1, 2])}
+                      disabled={!CheckPermissions(auth, [0, 1, 2, 4])}
                     >
                       Ir al Aplicativo
                     </button>
@@ -245,10 +230,10 @@ export default function Home() {
                   <li>
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
-                      onClick={handleAppReportes}
-                      disabled={!CheckPermissions(auth, [0, 4])}
+                      onClick={showModalGR}
+                      disabled={!CheckPermissions(auth, [0, 1])}
                     >
-                      Ir al Aplicativo
+                      Reporte de solicitudes de pagos
                     </button>
                   </li>
                 </ul>
@@ -257,6 +242,13 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <GeneralReportModal
+        visible={modalVisibleGR}
+        close={() => {
+          setModalVisibleGR(null);
+        }}
+      />
     </>
   );
 }

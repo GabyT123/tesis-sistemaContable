@@ -53,20 +53,10 @@ const EditFacture = () => {
     date: FormatedDate(),
     details: "",
     items: [],
-    contableAdvanceState: Abierto,
-    advanceState: Abierto,
     soliciterState: Elaborando,
-    contableState: Pendiente,
-    imageTreasuryState: Pendiente,
-    paymentTreasuryState: Pendiente,
     financialState: Pendiente,
     applicantDate: FormatedDate(),
-    accountantDate: FormatedDate(),
-    contableAdvanceDate: FormatedDate(),
-    advanceDate: FormatedDate(),
-    treasuryDate: FormatedDate(),
     financialDate: FormatedDate(),
-    imageTreasuryDate: FormatedDate(),
     itemsComment: [],
   });
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -491,7 +481,7 @@ const EditFacture = () => {
       showModal();
     },
     delete: (rowData: Facture) => {
-      if (CheckPermissions(auth, [0, 3])) {
+      if (CheckPermissions(auth, [0])) {
         showConfirmModal(rowData.id);
       }
     },
@@ -674,7 +664,7 @@ const EditFacture = () => {
 
                   {isMenuOpen && (
                     <div className="relative text-center w-40 mx-14  bg-white divide-y divide-gray-100 shadow-lg ring-1 ring-black ring-opacity-5">
-                      {CheckPermissions(auth, [0, 3, 5]) && (
+                      {CheckPermissions(auth, [0, 1, 2, 3]) && (
                         <button
                           type="button"
                           className="block w-full px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -683,8 +673,16 @@ const EditFacture = () => {
                           PDF
                         </button>
                       )}
-                     
-                      {CheckPermissions(auth, [0, 3, 5]) && (
+                      {CheckPermissions(auth, [0, 1]) && (
+                        <button
+                          type="button"
+                          className="block w-full px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                          onClick={excelSolicitude}
+                        >
+                          EXCEL
+                        </button>
+                      )}
+                      {CheckPermissions(auth, [0, 3, 6]) && (
                         <button
                           type="button"
                           className="block w-full px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -693,7 +691,7 @@ const EditFacture = () => {
                           CASH PICHINCHA
                         </button>
                       )}
-                      {CheckPermissions(auth, [0, 3, 5]) && (
+                      {CheckPermissions(auth, [0, 3, 6]) && (
                         <button
                           type="button"
                           className="block w-full px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 hover:text-gray-900"
