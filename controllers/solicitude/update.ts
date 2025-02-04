@@ -14,9 +14,9 @@ export default async function handler(
   const newSolicitude = (): Solicitude => {
     switch (role) {
       case "9":
-        return { ...solicitude, applicantDate: FormatedDate() };
+        return { ...solicitude, applicantDate: FormatedDate() } as Solicitude;
       case "4":
-        return { ...solicitude, financialDate: FormatedDate() };
+        return { ...solicitude, financialDate: FormatedDate() } as Solicitude;
       default:
         return solicitude;
     }
