@@ -25,6 +25,8 @@
     "formik": "^2.2.9",
     "html-to-text": "^8.2.1",
     "jschardet": "^3.0.0",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "mongoose": "^6.4.1",
     "mysql": "^2.18.1",
     "next": "latest",
