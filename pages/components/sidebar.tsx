@@ -86,32 +86,6 @@ const Sidebar = () => {
                 </Link>
               </div>
 
-              {CheckPermissions(auth, [0, 1]) && (
-                <div>
-                  {mostrarCarga && (
-                    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-white z-50">
-                      <Image
-                        src="/logo.jpeg"
-                        alt="Cargando..."
-                        width={200}
-                        height={200}
-                        priority={false}
-                      />
-                    </div>
-                  )}
-                  <Link href="/reportes">
-                    <button className="w-full" onClick={handleChanges}>
-                      <div className="flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-full group cursor-pointer hover:shadow-lg m-auto">
-                        <HiOutlineDocumentReport className="text-2xl text-gray-600 group-hover:text-white" />
-                        <h3 className="text-base text-gray-800 group-hover:text-white font-semibold">
-                          Reportes
-                        </h3>
-                      </div>
-                    </button>
-                  </Link>
-                </div>
-              )}
-
               {CheckPermissions(auth, [0, 1, 4]) && (
                 <div>
                   {mostrarCarga && (

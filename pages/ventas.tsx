@@ -87,17 +87,14 @@ const Ventas = () => {
     edit: (rowData: any) => {
       Router.push({
         pathname: "/ventas/edit/" + (rowData.id as string),
-      })
+      });
     },
-    delete: async (rowData: any) => {
-      await HttpClient(
-        "/api/ventas/" + rowData.id,
-        "DELETE",
-        auth.userName,
-        auth.role
-      );
-      await loadData();
-    },
+    download: (rowData: any) =>
+      CheckPermissions(auth, [0])
+        ? Router.push({
+            pathname: "/ventas/reporte/" + (rowData.id as string),
+          })
+        : toast.error("No puedes acceder"),
   };
 
   const handleAppClientes = () => {

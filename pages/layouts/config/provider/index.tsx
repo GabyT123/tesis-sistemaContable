@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import LoadingContainer from "../../../components/loading_container";
@@ -5,6 +6,8 @@ import TreeTable, { ColumnData } from "../../../components/tree_table";
 import { FactureProvider } from "../../../../model";
 import { useAuth } from "../../../../lib/hooks/use_auth";
 import HttpClient from "../../../../lib/utils/http_client";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const ProvidersPanel = () => {
   const { auth } = useAuth();
@@ -33,7 +36,7 @@ const ProvidersPanel = () => {
       data
     );
     if (response.success) toast.success("Proveedor Actualizado");
-    else toast.success("Error!");
+    else toast.warning("Error al actualizar!");
     await loadData();
   };
 
@@ -45,7 +48,7 @@ const ProvidersPanel = () => {
       auth.role
     );
     if (response.success) toast.success("Proveedor Eliminado");
-    else toast.success("Error!");
+    else toast.success("Proveedor Eliminado");
     await loadData();
   };
 
@@ -58,28 +61,57 @@ const ProvidersPanel = () => {
       data
     );
     if (response.success) toast.success("Nuevo Proveedor Ingresado");
-    else toast.success("Error!");
+    else toast.warning("Error al insertar!");
     await loadData();
   };
 
-  const columns: ColumnData[] = [
-    {
-      dataField: "name",
-      caption: "Nombre del Proveedor",
-    },
-    {
-      dataField: "email",
-      caption: "Email del proveedor",
-    },
-  ];
+  const exportarReportePDF = () => {
+    if (tableData.length === 0) {
+      toast.warning("No hay datos de proveedores para exportar.");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.text("Reporte de Proveedores", 14, 10);
+
+    const headers = [["#", "Nombre del Proveedor", "Email"]];
+    const data = tableData.map((item, index) => [
+      index + 1,
+      item.name,
+      item.email,
+    ]);
+
+    autoTable(doc, {
+      head: headers,
+      body: data,
+      startY: 20,
+      styles: { fontSize: 10, cellPadding: 2 },
+      headStyles: { fillColor: [0, 112, 192], textColor: [255, 255, 255] }, // Encabezado en azul
+      alternateRowStyles: { fillColor: [240, 240, 240] }, // Filas alternas en gris
+    });
+
+    doc.save("Reporte_Proveedores.pdf");
+    toast.success("Reporte de proveedores exportado en PDF con éxito!");
+  };
 
   useEffect(() => {
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const columns: ColumnData[] = [
+    { dataField: "name", caption: "Nombre del Proveedor" },
+    { dataField: "email", caption: "Email del proveedor" },
+  ];
 
   return (
     <div style={{ padding: "40px 0" }}>
+      <button
+        className="text-center bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full text-sm"
+        onClick={exportarReportePDF}
+      >
+        Reporte de Proveedores (PDF)
+      </button>
+
       <LoadingContainer visible={loading} miniVersion>
         <TreeTable
           dataSource={tableData}

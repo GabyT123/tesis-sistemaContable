@@ -96,10 +96,10 @@ const PrintSolicitude = () => {
                   <tr>
                     <td width={"50%"}>
                       <h6
-                        className="mx-4"
+                        className="mx-4 bg-gray-400"
                         style={{
-                          background: theme.colors.red,
                           padding: "20px 35px 20px 35px",
+                          fontWeight: 600,
                           color: "white",
                           textAlign: "center",
                         }}
@@ -108,14 +108,7 @@ const PrintSolicitude = () => {
                       </h6>
                     </td>
                     <td width={"50%"} className="text-center">
-                      <img
-                        src="/logo_horizontal.png"
-                        alt="logo"
-                        style={{
-                          width: "300px",
-                          height: "60px",
-                        }}
-                      />
+                      
                     </td>
                   </tr>
                 </table>
@@ -171,10 +164,9 @@ const PrintSolicitude = () => {
                     <tr>
                       {facturesColumns.map((item, index) => (
                         <th
-                          className="p-1"
+                          className="p-1 bg-gray-400"
                           style={{
                             textAlign: "center",
-                            backgroundColor: "#8c130f",
                             color: "white",
                             border: "1px solid black",
                           }}
@@ -187,93 +179,91 @@ const PrintSolicitude = () => {
                   </thead>
                   <tbody>
                     {solicitude.items.map((item, index) => (
-                        <>
-                          <tr
+                      <>
+                        <tr
+                          style={{
+                            textAlign: "center",
+                            verticalAlign: "middle",
+                          }}
+                          key={index}
+                        >
+                          <td
+                            className="p-0"
                             style={{
-                              textAlign: "center",
-                              verticalAlign: "middle",
+                              border: "1px solid black",
+                              width: 150,
                             }}
-                            key={index}
                           >
-                           
-                            
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 150,
-                              }}
-                            >
-                              {item.provider?.name ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 60,
-                              }}
-                            >
-                              {item.factureNumber ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 300,
-                                textAlign: "left",
-                              }}
-                            >
-                              {item.details ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 200,
-                                textAlign: "left",
-                              }}
-                            >
-                              {item.observation ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 90,
-                              }}
-                            >
-                              {item.documentDelivered ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 120,
-                              }}
-                            >
-                              {item.beneficiary ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 60,
-                              }}
-                            >
-                              {item.accountBank ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 50,
-                              }}
-                            >
-                              {(item.value ?? "").toLocaleString("en-US")}
-                            </td>
-                          </tr>
-                        </>
-                      ))}
+                            {item.provider?.name ?? ""}
+                          </td>
+                          <td
+                            className="p-0"
+                            style={{
+                              border: "1px solid black",
+                              width: 60,
+                            }}
+                          >
+                            {item.factureNumber ?? ""}
+                          </td>
+                          <td
+                            className="p-0"
+                            style={{
+                              border: "1px solid black",
+                              width: 300,
+                              textAlign: "left",
+                            }}
+                          >
+                            {item.details ?? ""}
+                          </td>
+                          <td
+                            className="p-0"
+                            style={{
+                              border: "1px solid black",
+                              width: 200,
+                              textAlign: "left",
+                            }}
+                          >
+                            {item.observation ?? ""}
+                          </td>
+                          <td
+                            className="p-0"
+                            style={{
+                              border: "1px solid black",
+                              width: 90,
+                            }}
+                          >
+                            {item.documentDelivered ?? ""}
+                          </td>
+                          <td
+                            className="p-0"
+                            style={{
+                              border: "1px solid black",
+                              width: 120,
+                            }}
+                          >
+                            {item.beneficiary ?? ""}
+                          </td>
+                          <td
+                            className="p-0"
+                            style={{
+                              border: "1px solid black",
+                              width: 60,
+                            }}
+                          >
+                            {item.accountBank ?? ""}
+                          </td>
+                          <td
+                            className="p-0"
+                            style={{
+                              border: "1px solid black",
+                              width: 50,
+                            }}
+                          >
+                            {(item.value ?? "").toLocaleString("en-US")}
+                          </td>
+                        </tr>
+                      </>
+                    ))}
                     <tr>
                       <th
                         style={{

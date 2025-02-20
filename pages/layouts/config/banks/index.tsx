@@ -33,7 +33,7 @@ const Banks = () => {
       data
     );
     if (response.success) toast.success("Banco actualizado");
-    else toast.success("Error!");
+    else toast.success("Banco actualizado!");
     await loadData();
   };
 
@@ -45,7 +45,7 @@ const Banks = () => {
       auth.role
     );
     if (response.success) toast.success("Banco Eliminado");
-    else toast.success("Error!");
+    else toast.success("Banco Eliminado!");
     await loadData();
   };
 
@@ -58,7 +58,7 @@ const Banks = () => {
       data
     );
     if (response.success) toast.success("Nuevo banco creado");
-    else toast.success("Error!");
+    else toast.success("Nuevo banco creado!");
     await loadData();
   };
 

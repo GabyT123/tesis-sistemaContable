@@ -39,7 +39,7 @@ const EditVenta = () => {
         auth.role
       );
       setInitialValues(response.data);
-      setProduct(response.data.items);
+      setProduct(Array.isArray(response.data.items) ? response.data.items : []);
     } else {
       setTimeout(loadData, 1000);
     }
@@ -52,10 +52,14 @@ const EditVenta = () => {
     if (Router.asPath !== Router.route) {
       const solicitudeId = Router.query.id as string;
 
+      console.log(product)
       const requestData = {
         ...formData,
         id: solicitudeId,
+        product: product,
       };
+
+      console.log(requestData)
       const response: ResponseData = await HttpClient(
         "/api/ventas",
         "PUT",

@@ -73,6 +73,7 @@ const ClientesPage = () => {
         auth.userName,
         auth.role
       );
+      toast.success("Cliente eliminado")
       await loadData();
     },
   };
