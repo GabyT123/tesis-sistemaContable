@@ -4,11 +4,14 @@ import RoleLayout from "../pages/layouts/role_layout";
 import { CheckPermissions } from "../lib/utils/check_permissions";
 import { useAuth } from "../lib/hooks/use_auth";
 import { useEffect, useState } from "react";
-import { Customer, ResponseData, Sale } from "../model";
+import { Customer, ResponseData } from "../model";
 import TreeTable, { ColumnData } from "../pages/components/tree_table";
 import HttpClient from "../lib/utils/http_client";
 import ClientesModal from "../pages/components/modals/clientesModal";
 import { toast } from "react-toastify";
+
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const ClientesPage = () => {
   const { auth } = useAuth();
@@ -39,7 +42,7 @@ const ClientesPage = () => {
 
   useEffect(() => {
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const columns: ColumnData[] = [
@@ -53,11 +56,11 @@ const ClientesPage = () => {
     },
     {
       dataField: "phone",
-      caption: "Telefono",
+      caption: "Teléfono",
     },
     {
       dataField: "address",
-      caption: "Direccion",
+      caption: "Dirección",
     },
   ];
 
@@ -73,13 +76,42 @@ const ClientesPage = () => {
         auth.userName,
         auth.role
       );
-      toast.success("Cliente eliminado")
+      toast.success("Cliente eliminado");
       await loadData();
     },
   };
 
-  const handleAppClientes = () => {
-    Router.push({ pathname: "/clientes" });
+  // Función para exportar el reporte de clientes en PDF
+  const exportarReporteClientesPDF = () => {
+    if (tableData.length === 0) {
+      toast.warning("No hay clientes registrados para exportar.");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.text("Reporte de Clientes", 14, 10);
+
+    const headers = [["#", "Nombre", "Correo", "Teléfono", "Dirección"]];
+
+    const data = tableData.map((item, index) => [
+      index + 1,
+      item.name,
+      item.email,
+      item.phone,
+      item.address,
+    ]);
+
+    autoTable(doc, {
+      head: headers,
+      body: data,
+      startY: 20,
+      styles: { fontSize: 10, cellPadding: 2 },
+      headStyles: { fillColor: [0, 123, 255], textColor: [255, 255, 255] }, // Encabezado azul
+      alternateRowStyles: { fillColor: [240, 240, 240] }, // Filas alternas en gris
+    });
+
+    doc.save("Reporte_Clientes.pdf");
+    toast.success("Reporte de clientes exportado en PDF con éxito!");
   };
 
   return (
@@ -93,7 +125,7 @@ const ClientesPage = () => {
           <div className="w-12/12 md:w-5/6 flex items-center justify-center">
             <div className="w-12/12 bg-white my-14 mx-8">
               <div className="grid grid-cols-1 md:grid-cols-1 gap-4 m-2">
-                <p className="my-4    text-center">
+                <p className="my-4 text-center">
                   <em
                     style={{
                       color: "#334155",
@@ -123,6 +155,13 @@ const ClientesPage = () => {
                     disabled={!CheckPermissions(auth, [0, 1])}
                   >
                     Registrar nuevo cliente
+                  </button>
+
+                  <button
+                    className="ml-2 text-center bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full text-sm"
+                    onClick={exportarReporteClientesPDF}
+                  >
+                    Reporte de Clientes (PDF)
                   </button>
                 </div>
                 <TreeTable
@@ -184,4 +223,5 @@ const ClientesPage = () => {
     </>
   );
 };
+
 export default ClientesPage;
