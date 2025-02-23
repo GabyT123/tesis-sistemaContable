@@ -8,12 +8,16 @@ import { toast } from "react-toastify";
 import { CheckPermissions } from "../lib/utils/check_permissions";
 import GeneralReportModal from "../pages/components/modals/generalReport";
 import { useState } from "react";
+import GeneralReportVentasModal from "./components/modals/generalReportVentas";
 
 export default function Home() {
   const { auth } = useAuth();
   const [modalVisibleGR, setModalVisibleGR] = useState<boolean>(false);
+  const [modalVisibleGR2, setModalVisibleGR2] = useState<boolean>(false);
 
   const showModalGR = () => setModalVisibleGR(true);
+
+  const showModalGR2 = () => setModalVisibleGR2(true);
 
   const handleSolicitudes = () => {
     auth.role === 1
@@ -66,7 +70,7 @@ export default function Home() {
                   fontSize: "26px",
                 }}
               >
-                "Comercial Torres" 
+                "Comercial Torres"
               </em>
               <hr
                 className="mt-0 ml-0 "
@@ -236,6 +240,15 @@ export default function Home() {
                       Reporte de solicitudes de pagos
                     </button>
                   </li>
+                  <li>
+                    <button
+                      className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
+                      onClick={showModalGR2}
+                      disabled={!CheckPermissions(auth, [0, 1])}
+                    >
+                      Reporte de solicitudes de ventas
+                    </button>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -247,6 +260,13 @@ export default function Home() {
         visible={modalVisibleGR}
         close={() => {
           setModalVisibleGR(null);
+        }}
+      />
+
+      <GeneralReportVentasModal
+        visible={modalVisibleGR2}
+        close={() => {
+          setModalVisibleGR2(null);
         }}
       />
     </>

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { ModalProps } from "../../../model";
 import theme from "../../../lib/styles/theme";
 
-const GeneralReportModal = (props: ModalProps<any>) => {
+const GeneralReportVentasModal = (props: ModalProps<any>) => {
   const [dates, setDates] = useState<Array<string>>([]);
   return (
     <>
@@ -19,7 +19,7 @@ const GeneralReportModal = (props: ModalProps<any>) => {
             style={{ color: theme.colors.red }}
             className="text-center text-xl mb-2 font-semibold"
           >
-            Reporte General de Pagos
+            Reporte General de Ventas
           </div>
 
           <label htmlFor="date-one">Fecha inicio</label>
@@ -58,7 +58,7 @@ const GeneralReportModal = (props: ModalProps<any>) => {
                 } else {
                   Router.push({
                     pathname:
-                      "/generalReportHistory/" + dates[0] + "¡" + dates[1],
+                      "/generalReportVentas/" + dates[0] + "¡" + dates[1],
                   });
                 }
               }}
@@ -79,4 +79,4 @@ const GeneralReportModal = (props: ModalProps<any>) => {
     </>
   );
 };
-export default GeneralReportModal;
+export default GeneralReportVentasModal;
