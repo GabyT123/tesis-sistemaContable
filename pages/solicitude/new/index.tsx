@@ -15,7 +15,6 @@ import RoleLayout from "../../../pages/layouts/role_layout";
 import { Abierto, Elaborando, Pendiente } from "../../../lib/utils/constants";
 import Sidebar from "../../../pages/components/sidebar";
 
-// Inicio de la app
 const NewFacture = () => {
   const { auth } = useAuth();
   const [loading, setLoading] = useState<boolean>(false);

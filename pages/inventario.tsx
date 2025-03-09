@@ -86,6 +86,13 @@ const InventarioPage = () => {
     toast.success("Reporte de inventario exportado en PDF con éxito!");
   };
 
+  const showModal = () => setModalVisible(true);
+  const hideModal = async () => {
+    if (editingProduct != null) setEditingProduct(null);
+    setModalVisible(false);
+    await loadData();
+  };
+
   return (
     <>
       <title>Inventario de productos</title>
@@ -101,7 +108,7 @@ const InventarioPage = () => {
 
             <button
               className="text-center bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full text-sm"
-              onClick={() => setModalVisible(true)}
+              onClick={showModal}
             >
               Agregar Producto
             </button>
@@ -154,6 +161,38 @@ const InventarioPage = () => {
           </div>
         </div>
       </div>
+      <ProductModal
+        visible={modalVisible}
+        close={hideModal}
+        initialData={editingProduct}
+        onDone={async (newUser: Product) => {
+          const response: ResponseData =
+            editingProduct == null
+              ? await HttpClient(
+                  "/api/product",
+                  "POST",
+                  auth.userName,
+                  auth.role,
+                  newUser
+                )
+              : await HttpClient(
+                  "/api/product",
+                  "PUT",
+                  auth.userName,
+                  auth.role,
+                  newUser
+                );
+          if (response.success) {
+            toast.success(
+              editingProduct == null
+                ? "Producto creado!"
+                : "Producto actualizado!"
+            );
+          } else {
+            toast.warning(response.message);
+          }
+        }}
+      />
     </>
   );
 };

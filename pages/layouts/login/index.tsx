@@ -27,7 +27,7 @@ const Login = () => {
     if (response.success) {
       const data = response.data;
       login(data);
-      console.log(formData)
+      console.log(formData);
     } else {
       toast.warning(response.message);
     }
@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <>
-    <title>Sistema contable Comercial Torres</title>
+      <title>Sistema contable Comercial Torres</title>
       <section className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-950 via-indigo-600 to-indigo-300">
         <div className="container py-5">
           <div className="flex justify-center items-center m-2">
@@ -60,8 +60,15 @@ const Login = () => {
                       alt=""
                       className="mx-auto"
                     />
-                    <h2 className="text-center" style={{color: "#610d9a", padding: "12px", fontSize: "20px", }}>
-                    Sistema contable Comercial Torres
+                    <h2
+                      className="text-center"
+                      style={{
+                        color: "#610d9a",
+                        padding: "12px",
+                        fontSize: "20px",
+                      }}
+                    >
+                      Sistema contable Comercial Torres
                     </h2>
                     <LoadingContainer visible={loading} miniVersion>
                       <form onSubmit={formik.handleSubmit}>
@@ -93,14 +100,21 @@ const Login = () => {
                           type="submit"
                         >
                           Iniciar Sesión
-                        </button>  
-                          <footer>
-                            <div className="mt-8 pt-6">
-                              <p style={{color: "#000", fontSize: "11px", textAlign: "center", }}>
-                              <strong>© Desarrollado</strong> por Sistemas 2022-<strong>{currentYear}</strong>
-                              </p>
-                            </div>
-                          </footer>                   
+                        </button>
+                        <footer>
+                          <div className="mt-8 pt-6">
+                            <p
+                              style={{
+                                color: "#000",
+                                fontSize: "11px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <strong>© Desarrollado</strong> por Sistemas 2022-
+                              <strong>{currentYear}</strong>
+                            </p>
+                          </div>
+                        </footer>
                       </form>
                     </LoadingContainer>
                   </div>
@@ -122,7 +136,6 @@ const Login = () => {
                       />
                     </div>
                   </div> */}
-
                 </div>
               </div>
             </div>

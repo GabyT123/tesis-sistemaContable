@@ -30,6 +30,7 @@ const Ventas = () => {
       auth.role
     );
     if (response.success) {
+      console.log(response.data)
       const ventas: Array<Sale> = response.data;
       setTableData(ventas);
     } else {
@@ -60,24 +61,8 @@ const Ventas = () => {
       caption: "Telefono del cliente",
     },
     {
-      dataField: "totalPrice",
+      dataField: "total",
       caption: "Valor Total",
-      cellRender: (params) => {
-        const factures: Array<Product> = params.value;
-        let total = 0;
-        if (factures?.length > 0)
-          factures?.forEach((item: Product) => {
-            total += item.price ?? 0;
-          });
-        const formato = total.toLocaleString(navigator.language, {
-          minimumFractionDigits: 2,
-        });
-        return (
-          <p style={{ margin: 2 }}>
-            <strong>${formato}</strong>
-          </p>
-        );
-      },
       cssClass: "bold",
       width: 100,
     },

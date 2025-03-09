@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import read from "../../../controllers/solicitude/read";
 import remove from "../../../controllers/solicitude/delete";
 import dbConnect from "../../../lib/middlewares/mongo";
-import listOfOne from "../../../controllers/solicitude/listOfOne";
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,8 +15,6 @@ export default async function handler(
     switch (req.method) {
       case "GET":
         return await read(req, res);
-      case "POST":
-        return await listOfOne(req, res);
       case "DELETE":
         return await remove(req, res);
       default:

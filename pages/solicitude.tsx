@@ -41,6 +41,7 @@ const SolicitudePage = (props: Props) => {
     );
 
     const solicitudes: Array<Solicitude> = response.data ?? [];
+    console.log(solicitudes)
     setTableData(solicitudes);
     setLoading(false);
   };

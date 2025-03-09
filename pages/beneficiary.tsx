@@ -22,7 +22,7 @@ const BeneficiaryPage = () => {
   const loadData = async () => {
     setLoading(true);
     const response = await HttpClient(
-      "/api/beneficiary",
+      "/api/beneficiarios",
       "GET",
       auth.userName,
       auth.role
@@ -92,7 +92,7 @@ const BeneficiaryPage = () => {
     },
     delete: async (rowData: any) => {
       await HttpClient(
-        "/api/client/" + rowData.id,
+        "/api/beneficiarios/" + rowData.id,
         "DELETE",
         auth.userName,
         auth.role
@@ -319,14 +319,14 @@ const BeneficiaryPage = () => {
             const response: ResponseData =
               editingBeneficiary == null
                 ? await HttpClient(
-                    "/api/beneficiary",
+                    "/api/beneficiarios",
                     "POST",
                     auth.userName,
                     auth.role,
                     newUser
                   )
                 : await HttpClient(
-                    "/api/beneficiary",
+                    "/api/beneficiarios",
                     "PUT",
                     auth.userName,
                     auth.role,

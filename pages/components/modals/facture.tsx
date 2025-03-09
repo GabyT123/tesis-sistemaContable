@@ -68,7 +68,7 @@ const FactureModal = (props: Props) => {
 
   const loadClients = async () => {
     const response: ResponseData = await HttpClient(
-      "/api/beneficiary/",
+      "/api/beneficiarios/",
       "GET",
       auth.userName,
       auth.role
@@ -92,8 +92,8 @@ const FactureModal = (props: Props) => {
       matches = suggestions.filter((element) => {
         const regex = new RegExp(`${text}`, "gi");
         return name
-          ? element.name.match(regex)
-          : element.beneficiary.match(regex);
+          ? element.name?.match(regex)
+          : element.beneficiary?.match(regex);
       });
     }
     setSuggestions(matches);

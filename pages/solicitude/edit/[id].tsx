@@ -95,6 +95,7 @@ const EditFacture = () => {
       setInitialValues(response.data);
       setItems(response.data.items);
       setItemsComment(response.data.itemsComment);
+      console.log(response.data)
       setLoading(false);
     } else {
       setTimeout(loadData, 1000);

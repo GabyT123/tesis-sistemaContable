@@ -68,8 +68,9 @@ const EditVenta = () => {
         requestData
       );
       if (response.success) {
-        toast.success("Solicitud editada correctamente!");
+        toast.success("Venta editada correctamente!");
         await loadData();
+        Router.back()
       } else {
         toast.warning(response.message);
       }

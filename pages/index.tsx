@@ -20,9 +20,7 @@ export default function Home() {
   const showModalGR2 = () => setModalVisibleGR2(true);
 
   const handleSolicitudes = () => {
-    auth.role === 1
-      ? Router.push({ pathname: "/requestsSolicitude" })
-      : Router.push({ pathname: "/solicitude" });
+    Router.push({ pathname: "/solicitude" });
   };
 
   const handleHistory = () => {
